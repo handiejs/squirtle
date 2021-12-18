@@ -2,17 +2,21 @@ import { ReactNode } from 'react';
 
 import { StringField } from '@handie/runtime-core/dist/types/input';
 import { ComponentCtor, isNumber, getControl } from 'handie-react';
-import { StringFieldHeadlessWidget } from 'handie-react/dist/widgets';
+import { StringFilterHeadlessWidget } from 'handie-react/dist/widgets';
 
-export default class InputEditStringFieldWidget extends StringFieldHeadlessWidget {
+export default class InputStringFilterWidget extends StringFilterHeadlessWidget {
   public render(): ReactNode {
     const props: Record<string, any> = {
       value: this.props.value,
       placeholder: this.getPlaceholder(),
     };
 
+    if (this.config.className) {
+      props.className = this.config.className;
+    }
+
     if (this.showValidationRulesAsNative) {
-      const { min, max } = this.props.field as StringField;
+      const { min, max } = this.props.filter as StringField;
 
       if (isNumber(min)) {
         props.minLength = min;

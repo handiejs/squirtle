@@ -13,7 +13,7 @@ export default class SelectEditEnumFieldWidget extends EnumFieldHeadlessWidget {
         value={this.props.value}
         placeholder={this.getPlaceholder()}
         clearable={!this.props.field.required}
-        onChange={this.props.onChange}
+        onChange={this.onChange}
       >
         {this.state.options.map((opt) =>
           Option ? (

@@ -11,7 +11,7 @@ export default class RadioEditEnumFieldWidget extends EnumFieldHeadlessWidget {
     const Icon = getControl('Icon') as ComponentCtor;
 
     return RadioGroup ? (
-      <RadioGroup value={this.props.value} onChange={this.props.onChange}>
+      <RadioGroup value={this.props.value} onChange={this.onChange}>
         {this.state.options.map((opt) =>
           Radio ? (
             <Radio value={opt.value} disabled={opt.disabled}>

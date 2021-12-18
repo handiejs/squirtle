@@ -8,7 +8,7 @@ export default class SwitchEditBooleanFieldWidget extends BooleanFieldHeadlessWi
     const Switch = getControl('Switch') as ComponentCtor;
 
     return Switch ? (
-      <Switch value={this.props.value} onChange={this.props.onChange} />
+      <Switch value={this.props.value} onChange={this.onChange} />
     ) : null;
   }
 }
