@@ -62,8 +62,10 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
         {FilterRenderer ? (
           <FilterRenderer
             filter={filter}
-            value={this.condition[filter.name]}
-            onChange={this.setFilterValue}
+            value={this.state.condition[filter.name]}
+            onChange={(filterName, value) =>
+              this.setFilterValue(filterName, value)
+            }
           />
         ) : null}
       </FormField>
@@ -163,7 +165,7 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
         <Button
           {...buttonProps}
           key="SearchButtonOfFormSearchWidget"
-          onClick={this.handleSearch}
+          onClick={(evt) => this.handleSearch(evt)}
         >
           查询
         </Button>,
@@ -176,7 +178,7 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
           className="FormSearch-button"
           size={formControlSize}
           key="ResetButtonOfFormSearchWidget"
-          onClick={this.handleReset}
+          onClick={(evt) => this.handleReset(evt)}
         >
           重置
         </Button>,
@@ -206,7 +208,7 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
           style={{ display: 'none' }}
           key="SearchButtonProxyOfFormSearchWidget"
         >
-          <Button nativeType="submit" onClick={this.handleSearch}>
+          <Button nativeType="submit" onClick={(evt) => this.handleSearch(evt)}>
             替身查询
           </Button>
         </div>,
@@ -222,7 +224,7 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
     const form = Form ? (
       <Form
         key="FormOfFormSearchWidget"
-        value={this.condition}
+        value={this.state.condition}
         controlSize={formControlSize}
         layout={this.getBehavior('formLayout')}
         labelOption={{ width: this.resolveLabelWidth() }}

@@ -29,6 +29,8 @@ export default class InputStringFilterWidget extends StringFilterHeadlessWidget 
 
     const TextInput = getControl('TextInput') as ComponentCtor;
 
-    return TextInput ? <TextInput {...props} onInput={this.onChange} /> : null;
+    return TextInput ? (
+      <TextInput {...props} onInput={(value) => this.onChange(value)} />
+    ) : null;
   }
 }
