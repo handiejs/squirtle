@@ -9,7 +9,13 @@ export default class SelectEditEnumFilterWidget extends EnumFilterHeadlessWidget
     const Option = getControl('Option') as ComponentCtor;
 
     const children: ReactNode[] = this.state.options.map((opt) =>
-      Option ? <Option label={opt.label} value={opt.value} /> : null,
+      Option ? (
+        <Option
+          label={opt.label}
+          value={opt.value}
+          key={`Option${opt.value}OfSelectEditEnumFilterWidget`}
+        />
+      ) : null,
     );
 
     const showEmptyValueOption = this.getCommonBehavior(
@@ -22,6 +28,7 @@ export default class SelectEditEnumFilterWidget extends EnumFilterHeadlessWidget
         <Option
           label={this.getCommonBehavior('filter.emptyValueOptionLabel')}
           value=""
+          key="OptionAllOfSelectEditEnumFilterWidget"
         />,
       );
     }

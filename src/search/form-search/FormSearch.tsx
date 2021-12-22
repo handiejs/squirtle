@@ -55,7 +55,10 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
     const FilterRenderer = getRenderer('FilterRenderer') as ComponentCtor;
 
     return FormField ? (
-      <FormField label={filter.label}>
+      <FormField
+        label={filter.label}
+        key={`${filter.name}FilterOfFormSearchWidget`}
+      >
         {FilterRenderer ? (
           <FilterRenderer
             filter={filter}
@@ -67,9 +70,15 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
     ) : null;
   }
 
-  private renderFilterRow(filters: FilterDescriptor[]): ReactNode {
+  private renderFilterRow(
+    filters: FilterDescriptor[],
+    index: number,
+  ): ReactNode {
     return (
-      <div className="FormSearch-filterRow">
+      <div
+        className="FormSearch-filterRow"
+        key={`FilterRow${index}OfFormSearchWidget`}
+      >
         {filters.map((filter) => this.renderFilter(filter))}
       </div>
     );
@@ -100,12 +109,15 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
 
       do {
         filterNodes.push(
-          this.renderFilterRow(remainedFilters.splice(0, rows.shift() * 1)),
+          this.renderFilterRow(
+            remainedFilters.splice(0, rows.shift() * 1),
+            remainedFilters.length,
+          ),
         );
       } while (remainedFilters.length > 0 && rows.length > 0);
 
       if (remainedFilters.length > 0) {
-        filterNodes.push(this.renderFilterRow(remainedFilters));
+        filterNodes.push(this.renderFilterRow(remainedFilters, 0));
       }
     } else {
       this.filters.forEach((filter) => {
@@ -148,7 +160,11 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
 
     if (searchable && Button) {
       buttons.push(
-        <Button {...buttonProps} onClick={this.handleSearch}>
+        <Button
+          {...buttonProps}
+          key="SearchButtonOfFormSearchWidget"
+          onClick={this.handleSearch}
+        >
           查询
         </Button>,
       );
@@ -159,6 +175,7 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
         <Button
           className="FormSearch-button"
           size={formControlSize}
+          key="ResetButtonOfFormSearchWidget"
           onClick={this.handleReset}
         >
           重置
@@ -174,13 +191,21 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
 
     const buttonGroup: ReactNode =
       buttons.length > 0 ? (
-        <div className={buttonGroupClassNames.join('')}>{buttons}</div>
+        <div
+          className={buttonGroupClassNames.join('')}
+          key="ButtonGroupOfFormSearchWidget"
+        >
+          {buttons}
+        </div>
       ) : null;
 
     if ((standalone || !searchable) && Button) {
       // for submission when the Enter key pressed
       formChildren.push(
-        <div style={{ display: 'none' }}>
+        <div
+          style={{ display: 'none' }}
+          key="SearchButtonProxyOfFormSearchWidget"
+        >
           <Button nativeType="submit" onClick={this.handleSearch}>
             替身查询
           </Button>
@@ -196,6 +221,7 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
 
     const form = Form ? (
       <Form
+        key="FormOfFormSearchWidget"
         value={this.condition}
         controlSize={formControlSize}
         layout={this.getBehavior('formLayout')}
