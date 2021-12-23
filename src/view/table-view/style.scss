@@ -17,12 +17,14 @@
   &-dataTable {
     flex-grow: 1;
   }
-}
 
-.ActionWidget {
-  cursor: pointer;
-}
-
-.ActionWidget + .ActionWidget {
-  margin-left: 8px;
+  :global {
+    .ActionWidget {
+      cursor: pointer;
+    }
+    
+    .ActionWidget + .ActionWidget {
+      margin-left: 8px;
+    }
+  }
 }
