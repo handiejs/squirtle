@@ -78,7 +78,7 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
   ): ReactNode {
     return (
       <div
-        className="FormSearch-filterRow"
+        className={this.getStyleClassName('FormSearch-filterRow')}
         key={`FilterRow${index}OfFormSearchWidget`}
       >
         {filters.map((filter) => this.renderFilter(filter))}
@@ -148,7 +148,7 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
     const standalone = this.getBehavior('actionsStandalone') === true;
     const searchable = this.resolveSearchable();
     const buttonProps: Record<string, any> = {
-      className: 'FormSearch-button',
+      className: this.getStyleClassName('FormSearch-button'),
       size: formControlSize,
       nativeType: standalone ? 'button' : 'submit',
     };
@@ -175,7 +175,7 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
     if (this.resolveResettable() && Button) {
       buttons.push(
         <Button
-          className="FormSearch-button"
+          className={this.getStyleClassName('FormSearch-button')}
           size={formControlSize}
           key="ResetButtonOfFormSearchWidget"
           onClick={(evt) => this.handleReset(evt)}
@@ -185,10 +185,12 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
       );
     }
 
-    const buttonGroupClassNames = ['FormSearch-buttonGroup'];
+    const buttonGroupClassNames = [
+      this.getStyleClassName('FormSearch-buttonGroup'),
+    ];
 
     if (standalone) {
-      buttonGroupClassNames.push('is-standalone');
+      buttonGroupClassNames.push(this.getStyleClassName('is-standalone'));
     }
 
     const buttonGroup: ReactNode =
@@ -234,7 +236,7 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
     ) : null;
 
     return (
-      <div className="FormSearch">
+      <div className={this.getStyleClassName('FormSearch')}>
         {standalone ? [form, buttonGroup] : [form]}
       </div>
     );
