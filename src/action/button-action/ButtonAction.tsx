@@ -15,7 +15,7 @@ export default class ButtonActionWidget extends ActionHeadlessWidget {
 
     const props: Record<string, any> = {
       className: classNames.join(' '),
-      disabled: this.disabled,
+      disabled: this.state.disabled,
     };
 
     if (this.config.size) {
