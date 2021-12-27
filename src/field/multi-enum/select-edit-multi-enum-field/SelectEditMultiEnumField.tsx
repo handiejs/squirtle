@@ -13,7 +13,7 @@ export default class SelectEditMultiEnumFieldWidget extends MultiEnumFieldHeadle
         value={this.props.value}
         placeholder={this.getPlaceholder()}
         multiple={true}
-        onChange={this.onChange}
+        onChange={(value) => this.onChange(value)}
       >
         {this.state.options.map((opt) =>
           Option ? (

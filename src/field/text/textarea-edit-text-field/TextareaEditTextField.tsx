@@ -41,6 +41,8 @@ export default class TextareaEditTextFieldWidget extends TextFieldHeadlessWidget
 
     const TextArea = getControl('TextArea') as ComponentCtor;
 
-    return TextArea ? <TextArea {...props} onInput={this.onChange} /> : null;
+    return TextArea ? (
+      <TextArea {...props} onInput={(value) => this.onChange(value)} />
+    ) : null;
   }
 }

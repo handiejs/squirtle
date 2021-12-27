@@ -17,7 +17,10 @@ export default class RadioEditBooleanFieldWidget extends BooleanFieldHeadlessWid
     ) : null;
 
     return RadioGroup ? (
-      <RadioGroup value={this.props.value} onChange={this.onChange}>
+      <RadioGroup
+        value={this.props.value}
+        onChange={(value) => this.onChange(value)}
+      >
         {this.negativeFirst
           ? [negativeOption, positiveOption]
           : [positiveOption, negativeOption]}
