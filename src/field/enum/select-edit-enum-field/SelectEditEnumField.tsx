@@ -18,6 +18,7 @@ export default class SelectEditEnumFieldWidget extends EnumFieldHeadlessWidget {
         {this.state.options.map((opt) =>
           Option ? (
             <Option
+              key={`Option${opt.value}OfSelectEditEnumFieldWidget`}
               label={opt.label}
               value={opt.value}
               disabled={opt.disabled}

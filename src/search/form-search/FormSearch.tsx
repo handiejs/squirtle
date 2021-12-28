@@ -5,9 +5,9 @@ import {
   FilterDescriptor,
   isBoolean,
   isNumber,
-  isNumeric,
   getControl,
   getRenderer,
+  renderFormFieldNodes,
 } from 'handie-react';
 import { SearchHeadlessWidget } from 'handie-react/dist/widgets';
 
@@ -86,52 +86,6 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
     );
   }
 
-  private renderFilters(): ReactNode[] {
-    const filterNodes: ReactNode[] = [];
-    const rows = (this.config.arrangement || '').split('|') as any[];
-
-    let needLayout = false;
-
-    if (rows.length > 0) {
-      const availableRows: number[] = [];
-
-      rows.forEach((row) => {
-        if (isNumeric(row) && Number(row) > 0) {
-          availableRows.push(row);
-        }
-      });
-
-      needLayout = availableRows.length === rows.length;
-    }
-
-    if (needLayout) {
-      const remainedFilters = this.filters.filter(
-        ({ hidden }) => hidden !== true,
-      );
-
-      do {
-        filterNodes.push(
-          this.renderFilterRow(
-            remainedFilters.splice(0, rows.shift() * 1),
-            remainedFilters.length,
-          ),
-        );
-      } while (remainedFilters.length > 0 && rows.length > 0);
-
-      if (remainedFilters.length > 0) {
-        filterNodes.push(this.renderFilterRow(remainedFilters, 0));
-      }
-    } else {
-      this.filters.forEach((filter) => {
-        if (!filter.hidden) {
-          filterNodes.push(this.renderFilter(filter));
-        }
-      });
-    }
-
-    return filterNodes;
-  }
-
   constructor(props: Record<string, any>) {
     super(props);
     this.setBehaviors('search.form', defaultBehaviors);
@@ -144,7 +98,12 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
 
   public render(): ReactNode {
     const formControlSize = this.getBehavior('formControlSize');
-    const formChildren: ReactNode[] = this.renderFilters();
+    const formChildren: ReactNode[] = renderFormFieldNodes(
+      this.filters,
+      this.config.arrangement,
+      this.renderFilter.bind(this),
+      this.renderFilterRow.bind(this),
+    );
     const standalone = this.getBehavior('actionsStandalone') === true;
     const searchable = this.resolveSearchable();
     const buttonProps: Record<string, any> = {

@@ -18,6 +18,7 @@ export default class SelectEditMultiEnumFieldWidget extends MultiEnumFieldHeadle
         {this.state.options.map((opt) =>
           Option ? (
             <Option
+              key={`Option${opt.value}OfSelectEditMultiEnumFieldWidget`}
               label={opt.label}
               value={opt.value}
               disabled={opt.disabled}
