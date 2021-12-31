@@ -56,7 +56,9 @@ export default class FormSearchWidget extends SearchHeadlessWidget {
 
     return FormField ? (
       <FormField
-        label={filter.label}
+        label={
+          this.config.hideFormControlLabel !== true ? filter.label : undefined
+        }
         key={`${filter.name}FilterOfFormSearchWidget`}
       >
         {FilterRenderer ? (
