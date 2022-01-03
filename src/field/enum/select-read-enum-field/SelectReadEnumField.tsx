@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-import { EnumFieldHeadlessWidget } from 'handie-react/dist/widgets';
+import { EnumFieldStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class SelectReadEnumFieldWidget extends EnumFieldHeadlessWidget {
+export default class SelectReadEnumFieldWidget extends EnumFieldStructuralWidget {
   public render(): ReactNode {
     return <span>{this.displayText}</span>;
   }

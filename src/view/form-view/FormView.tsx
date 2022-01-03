@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
 import { ComponentCtor, getRenderer } from 'handie-react';
-import { ObjectViewHeadlessWidget } from 'handie-react/dist/widgets';
+import { ObjectViewStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class FormViewWidget extends ObjectViewHeadlessWidget {
+export default class FormViewWidget extends ObjectViewStructuralWidget {
   private get id() {
     return '';
     // return this.$route.params.id || '';

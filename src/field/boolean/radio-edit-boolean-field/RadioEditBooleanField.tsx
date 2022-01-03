@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
 import { ComponentCtor, getControl } from 'handie-react';
-import { BooleanFieldHeadlessWidget } from 'handie-react/dist/widgets';
+import { BooleanFieldStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class RadioEditBooleanFieldWidget extends BooleanFieldHeadlessWidget {
+export default class RadioEditBooleanFieldWidget extends BooleanFieldStructuralWidget {
   public render(): ReactNode {
     const Radio = getControl('Radio') as ComponentCtor;
     const RadioGroup = getControl('RadioGroup') as ComponentCtor;

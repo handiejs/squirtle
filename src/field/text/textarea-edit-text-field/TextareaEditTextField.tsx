@@ -2,13 +2,14 @@ import { ReactNode } from 'react';
 
 import { StringField } from '@handie/runtime-core/dist/types/input';
 import { ComponentCtor, isNumber, getControl } from 'handie-react';
-import { TextFieldHeadlessWidget } from 'handie-react/dist/widgets';
+import { TextFieldStructuralWidget } from 'handie-react/dist/widgets';
 
+import { TextareaTextFieldWidgetConfig } from './typing';
 import defaultBehaviors from './behavior';
 
-export default class TextareaEditTextFieldWidget extends TextFieldHeadlessWidget {
-  constructor(props) {
-    super(props);
+export default class TextareaEditTextFieldWidget extends TextFieldStructuralWidget<TextareaTextFieldWidgetConfig> {
+  public componentWillMount(): void {
+    super.componentWillMount();
     this.setBehaviors('field.textarea', defaultBehaviors);
   }
 

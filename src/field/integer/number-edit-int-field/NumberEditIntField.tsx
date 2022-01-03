@@ -2,9 +2,9 @@ import { ReactNode } from 'react';
 
 import { NumberField } from '@handie/runtime-core/dist/types/input';
 import { ComponentCtor, isNumber, getControl } from 'handie-react';
-import { IntegerFieldHeadlessWidget } from 'handie-react/dist/widgets';
+import { IntegerFieldStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class NumberEditIntFieldWidget extends IntegerFieldHeadlessWidget {
+export default class NumberEditIntFieldWidget extends IntegerFieldStructuralWidget {
   public render(): ReactNode {
     const props: Record<string, any> = {
       value: this.props.value,

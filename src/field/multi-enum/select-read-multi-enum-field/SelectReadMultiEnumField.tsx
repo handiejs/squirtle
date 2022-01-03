@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
-import { MultiEnumFieldHeadlessWidget } from 'handie-react/dist/widgets';
+import { MultiEnumFieldStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class SelectReadMultiEnumFieldWidget extends MultiEnumFieldHeadlessWidget {
+export default class SelectReadMultiEnumFieldWidget extends MultiEnumFieldStructuralWidget {
   public render(): ReactNode {
     return <span>{this.displayText}</span>;
   }

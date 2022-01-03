@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
-import { TextFieldHeadlessWidget } from 'handie-react/dist/widgets';
+import { TextFieldStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class TextareaReadTextFieldWidget extends TextFieldHeadlessWidget {
+export default class TextareaReadTextFieldWidget extends TextFieldStructuralWidget {
   public render(): ReactNode {
     return <p>{this.formatValue()}</p>;
   }

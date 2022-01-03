@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 
-import { TableViewHeadlessWidget } from 'handie-react/dist/widgets';
+import { TableViewStructuralWidget } from 'handie-react/dist/widgets';
 
 import style from './style.scss';
 
-export default class TableViewWidget extends TableViewHeadlessWidget {
+export default class TableViewWidget extends TableViewStructuralWidget {
   constructor(props) {
     super(props);
     this.setStyleClassNames(style);

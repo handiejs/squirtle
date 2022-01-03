@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
 import { ComponentCtor, getControl } from 'handie-react';
-import { EnumFilterHeadlessWidget } from 'handie-react/dist/widgets';
+import { EnumFilterStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class SelectEditEnumFilterWidget extends EnumFilterHeadlessWidget {
+export default class SelectEditEnumFilterWidget extends EnumFilterStructuralWidget {
   public render(): ReactNode {
     const Select = getControl('Select') as ComponentCtor;
     const Option = getControl('Option') as ComponentCtor;

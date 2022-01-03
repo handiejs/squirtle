@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
 import { ComponentCtor, getControl } from 'handie-react';
-import { MultiEnumFilterHeadlessWidget } from 'handie-react/dist/widgets';
+import { MultiEnumFilterStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class SelectEditMultiEnumFilterWidget extends MultiEnumFilterHeadlessWidget {
+export default class SelectEditMultiEnumFilterWidget extends MultiEnumFilterStructuralWidget {
   public render(): ReactNode {
     const props: Record<string, any> = {
       value: this.props.value,

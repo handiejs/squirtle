@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
 import { ComponentCtor, getControl } from 'handie-react';
-import { BooleanFieldHeadlessWidget } from 'handie-react/dist/widgets';
+import { BooleanFieldStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class SwitchEditBooleanFieldWidget extends BooleanFieldHeadlessWidget {
+export default class SwitchEditBooleanFieldWidget extends BooleanFieldStructuralWidget {
   public render(): ReactNode {
     const Switch = getControl('Switch') as ComponentCtor;
 

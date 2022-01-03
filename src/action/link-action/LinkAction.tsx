@@ -1,22 +1,16 @@
 import { ReactNode } from 'react';
 
-import { ComponentCtor, omit, getControl } from 'handie-react';
-import { ActionHeadlessWidget } from 'handie-react/dist/widgets';
+import { ComponentCtor, getControl } from 'handie-react';
+import { LinkActionStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class LinkActionWidget extends ActionHeadlessWidget {
+export default class LinkActionWidget extends LinkActionStructuralWidget {
   public render(): ReactNode {
-    const classNames: string[] = ['ActionWidget', 'LinkActionWidget'];
-
-    if (this.config.className) {
-      classNames.push(this.config.className);
-    }
-
-    const props = omit(this.config, ['showIcon', 'iconOnly', 'icon']);
-
-    props.className = classNames.join(' ');
-
     const Link = getControl('Link') as ComponentCtor;
 
-    return Link ? <Link {...props} onClick={() => this.onExecute()} /> : null;
+    return Link ? (
+      <Link {...this.resolveProps()} onClick={() => this.onExecute()}>
+        {this.renderContent()}
+      </Link>
+    ) : null;
   }
 }

@@ -1,9 +1,11 @@
 import { ReactNode } from 'react';
 
 import { ComponentCtor, getControl } from 'handie-react';
-import { EnumFieldHeadlessWidget } from 'handie-react/dist/widgets';
+import { EnumFieldStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class RadioEditEnumFieldWidget extends EnumFieldHeadlessWidget {
+import { RadioEnumFieldWidgetConfig } from './typing';
+
+export default class RadioEditEnumFieldWidget extends EnumFieldStructuralWidget<RadioEnumFieldWidgetConfig> {
   public render(): ReactNode {
     const RadioGroup = getControl('RadioGroup') as ComponentCtor;
     const Radio = getControl('Radio') as ComponentCtor;

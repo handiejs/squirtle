@@ -2,9 +2,9 @@ import { ReactNode } from 'react';
 
 import { StringField } from '@handie/runtime-core/dist/types/input';
 import { ComponentCtor, isNumber, getControl } from 'handie-react';
-import { StringFieldHeadlessWidget } from 'handie-react/dist/widgets';
+import { StringFieldStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class InputEditStringFieldWidget extends StringFieldHeadlessWidget {
+export default class InputEditStringFieldWidget extends StringFieldStructuralWidget {
   public render(): ReactNode {
     const props: Record<string, any> = {
       value: this.props.value,
