@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { MultiEnumFieldStructuralWidget } from 'handie-react/dist/widgets';
+import { MultiEnumFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class SelectReadMultiEnumFieldWidget extends MultiEnumFieldStructuralWidget {
   public render(): ReactNode {

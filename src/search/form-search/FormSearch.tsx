@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { ComponentCtor, getControl } from 'handie-react';
-import { FormSearchStructuralWidget } from 'handie-react/dist/widgets';
+import { FormSearchStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class FormSearchWidget extends FormSearchStructuralWidget {
   public render(): ReactNode {

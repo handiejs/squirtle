@@ -6,7 +6,7 @@ import {
   ObjectViewWidgetState,
   getControl,
 } from 'handie-react';
-import { FormViewStructuralWidget } from 'handie-react/dist/widgets';
+import { FormViewStructuralWidget } from 'handie-react/dist/widgets/class';
 
 interface FormDialogViewWidgetConfig extends ViewWidgetConfig {
   readonly dialogWidth?: number | string;

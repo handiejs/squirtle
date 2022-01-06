@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { TableViewStructuralWidget } from 'handie-react/dist/widgets';
+import { TableViewStructuralWidget } from 'handie-react/dist/widgets/class';
 
 import style from './style.scss';
 

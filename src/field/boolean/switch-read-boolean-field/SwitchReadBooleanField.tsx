@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { BooleanFieldStructuralWidget } from 'handie-react/dist/widgets';
+import { BooleanFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class SwitchReadBooleanFieldWidget extends BooleanFieldStructuralWidget {
   public render(): ReactNode {

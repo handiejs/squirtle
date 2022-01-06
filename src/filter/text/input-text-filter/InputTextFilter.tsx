@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { StringField } from '@handie/runtime-core/dist/types/input';
 import { ComponentCtor, isNumber, getControl } from 'handie-react';
-import { TextFilterStructuralWidget } from 'handie-react/dist/widgets';
+import { TextFilterStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class InputTextFilterWidget extends TextFilterStructuralWidget {
   public render(): ReactNode {

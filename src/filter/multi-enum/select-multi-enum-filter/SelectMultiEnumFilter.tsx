@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import { ComponentCtor, getControl } from 'handie-react';
-import { MultiEnumFilterStructuralWidget } from 'handie-react/dist/widgets';
+import { MultiEnumFilterStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class SelectEditMultiEnumFilterWidget extends MultiEnumFilterStructuralWidget {
   public render(): ReactNode {

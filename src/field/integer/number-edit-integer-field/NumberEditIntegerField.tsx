@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import { NumberField } from '@handie/runtime-core/dist/types/input';
 import { ComponentCtor, isNumber, isNumeric, getControl } from 'handie-react';
-import { IntegerFieldStructuralWidget } from 'handie-react/dist/widgets';
+import { IntegerFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class NumberEditIntegerFieldWidget extends IntegerFieldStructuralWidget {
   public render(): ReactNode {

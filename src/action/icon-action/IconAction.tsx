@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { IconActionStructuralWidget } from 'handie-react/dist/widgets';
+import { IconActionStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class IconActionWidget extends IconActionStructuralWidget {
   public render(): ReactNode {

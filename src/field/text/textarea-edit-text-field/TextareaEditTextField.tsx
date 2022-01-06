@@ -1,13 +1,21 @@
 import { ReactNode } from 'react';
 
 import { StringField } from '@handie/runtime-core/dist/types/input';
-import { ComponentCtor, isNumber, getControl } from 'handie-react';
-import { TextFieldStructuralWidget } from 'handie-react/dist/widgets';
+import {
+  ComponentCtor,
+  BaseWidgetState,
+  isNumber,
+  getControl,
+} from 'handie-react';
+import { TextFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
 import { TextareaTextFieldWidgetConfig } from './typing';
 import defaultBehaviors from './behavior';
 
-export default class TextareaEditTextFieldWidget extends TextFieldStructuralWidget<TextareaTextFieldWidgetConfig> {
+export default class TextareaEditTextFieldWidget extends TextFieldStructuralWidget<
+  BaseWidgetState,
+  TextareaTextFieldWidgetConfig
+> {
   public componentWillMount(): void {
     super.componentWillMount();
     this.setBehaviors('field.textarea', defaultBehaviors);

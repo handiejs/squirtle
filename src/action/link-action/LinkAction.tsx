@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { LinkActionStructuralWidget } from 'handie-react/dist/widgets';
+import { LinkActionStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class LinkActionWidget extends LinkActionStructuralWidget {
   public render(): ReactNode {

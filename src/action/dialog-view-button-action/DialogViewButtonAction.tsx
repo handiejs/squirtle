@@ -5,7 +5,7 @@ import {
   ActionWidgetState,
   getRenderer,
 } from 'handie-react';
-import { ButtonActionStructuralWidget } from 'handie-react/dist/widgets';
+import { ButtonActionStructuralWidget } from 'handie-react/dist/widgets/class';
 
 interface DialogViewButtonActionWidgetConfig extends ButtonActionWidgetConfig {
   readonly view: string;
