@@ -1,14 +1,22 @@
 import { ReactNode } from 'react';
-
-import { ComponentCtor, getControl } from 'handie-react';
 import { IconActionStructuralWidget } from 'handie-react/dist/widgets';
 
 export default class IconActionWidget extends IconActionStructuralWidget {
   public render(): ReactNode {
-    const Icon = getControl('Icon') as ComponentCtor;
+    const { primary, danger } = this.props.action;
+    const classNames: string[] = ['IconActionWidget'];
 
-    return Icon ? (
-      <Icon {...this.resolveProps()} onClick={() => this.onExecute()} />
-    ) : null;
+    if (primary) {
+      classNames.push('IconActionWidget--primary');
+    }
+
+    if (danger) {
+      classNames.push('IconActionWidget--danger');
+    }
+
+    return this.renderIcon({
+      className: this.resolveClassNames(classNames.join(' ')),
+      onClick: () => this.onExecute(),
+    });
   }
 }
