@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 
 import { NumberField } from '@handie/runtime-core/dist/types/input';
-import { ComponentCtor, isNumber, getControl } from 'handie-react';
+import { ComponentCtor, isNumber, isNumeric, getControl } from 'handie-react';
 import { IntegerFieldStructuralWidget } from 'handie-react/dist/widgets';
 
-export default class NumberEditIntFieldWidget extends IntegerFieldStructuralWidget {
+export default class NumberEditIntegerFieldWidget extends IntegerFieldStructuralWidget {
   public render(): ReactNode {
     const props: Record<string, any> = {
       value: this.props.value,
@@ -28,7 +28,9 @@ export default class NumberEditIntFieldWidget extends IntegerFieldStructuralWidg
     return NumberInput ? (
       <NumberInput
         {...props}
-        onInput={(value) => this.onChange(parseFloat(value))}
+        onChange={(value) =>
+          this.onChange(isNumeric(value) ? parseFloat(value) : value)
+        }
       />
     ) : null;
   }

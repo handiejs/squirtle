@@ -1,2 +1,2 @@
-export { default as NumberEditIntFieldWidget } from './number-edit-int-field';
-export { default as NumberReadIntFieldWidget } from './number-read-int-field';
+export { default as NumberEditIntegerFieldWidget } from './number-edit-integer-field';
+export { default as NumberReadIntegerFieldWidget } from './number-read-integer-field';
