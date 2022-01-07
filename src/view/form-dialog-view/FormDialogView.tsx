@@ -3,6 +3,8 @@ import { ReactNode } from 'react';
 import {
   ComponentCtor,
   ViewWidgetConfig,
+  ListViewContext,
+  ObjectViewContext,
   ObjectViewWidgetState,
   getControl,
 } from 'handie-react';
@@ -32,20 +34,34 @@ export default class FormDialogViewWidget extends FormViewStructuralWidget<
     this.setState({ dialogVisible: false }, () => this.$$view.reset());
   }
 
+  protected fetchData(): void {
+    const ctx = this.$$view;
+    const opener = ctx.getOpener()!;
+    if (opener.getView().category === 'object' && ctx.getOne) {
+      ctx.getOne((opener as ObjectViewContext).getValue(), (data) => {
+        this.setState({ dataSource: data });
+        ctx.setValue(data);
+      });
+    }
+  }
+
   public componentDidMount(): void {
-    super.componentDidMount();
+    const opener = this.$$view.getOpener()!;
 
-    const parent = this.$$view.getParent()!;
-
-    parent.on(`dialog-view-show.${parent.getId()}`, () =>
-      this.setState({ dialogVisible: true }),
-    );
+    opener.on(`dialog-view-show.${opener.getId()}`, () => {
+      this.setState({ dialogVisible: true }, () => this.fetchData());
+    });
 
     this.on('submit', () => {
       this.$$view.insert(
         this.state.value,
         () => {
-          parent.reload();
+          if (opener.getView().category === 'list') {
+            (opener as ListViewContext).reload();
+          } else {
+            (opener as ObjectViewContext).getParent()!.reload();
+          }
+
           this.closeDialog();
         },
         (message) => this.$$app.alert(message),
@@ -54,9 +70,9 @@ export default class FormDialogViewWidget extends FormViewStructuralWidget<
   }
 
   public componentWillUnmount(): void {
-    const parent = this.$$view.getParent()!;
+    const opener = this.$$view.getOpener()!;
 
-    parent.off(`dialog-view-show.${parent.getId()}`);
+    opener.off(`dialog-view-show.${opener.getId()}`);
   }
 
   public render(): ReactNode {
@@ -80,6 +96,7 @@ export default class FormDialogViewWidget extends FormViewStructuralWidget<
         }
         visible={this.state.dialogVisible}
         centered
+        disableMask
         onClose={closeDialog}
       >
         {this.renderForm()}
