@@ -1,0 +1,63 @@
+{
+  "name": "@handie/squirtle",
+  "version": "0.0.0",
+  "description": "Widgets for Handie-React",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "handie",
+    "ui",
+    "framework",
+    "ui-framework",
+    "ui-solution",
+    "config-driven",
+    "admin",
+    "admin-dashboard",
+    "management-system",
+    "management-systems",
+    "react",
+    "reactjs",
+    "react.js"
+  ],
+  "author": "Ourai Lin <ourairyu@gmail.com> (https://ourai.ws/)",
+  "license": "MIT",
+  "homepage": "https://www.yuque.com/handie",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/handiejs/squirtle.git"
+  },
+  "scripts": {
+    "precopy": "rm -rf dist",
+    "copy": "mkdir dist && cp -R src/* dist",
+    "prebuild": "npm run copy",
+    "build": "tsc && rm -rf dist/shims-*.d.ts",
+    "prerelease": "npm run build",
+    "release": "npm publish --access=public"
+  },
+  "peerDependencies": {
+    "handie-react": "~0.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@ntks/eslint-config": "0.0.0",
+    "@ntks/stylelint-config": "0.0.5",
+    "@types/node": "^13.11.1",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "eslint": "^7.21.0",
+    "eslint-plugin-react": "^7.27.1",
+    "handie-react": "0.0.0",
+    "petals-ui": "0.0.18",
+    "prettier": "^2.2.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rimraf": "^3.0.0",
+    "stylelint": "^13.12.0",
+    "typescript": "^4.1.3"
+  }
+}
