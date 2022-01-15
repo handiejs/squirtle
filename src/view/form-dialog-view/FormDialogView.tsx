@@ -37,11 +37,16 @@ export default class FormDialogViewWidget extends FormViewStructuralWidget<
   protected fetchData(): void {
     const ctx = this.$$view;
     const opener = ctx.getOpener()!;
+
     if (opener.getView().category === 'object' && ctx.getOne) {
-      ctx.getOne((opener as ObjectViewContext).getValue(), (data) => {
-        this.setState({ dataSource: data });
-        ctx.setValue(data);
-      });
+      ctx.setBusy(true);
+
+      ctx
+        .getOne((opener as ObjectViewContext).getValue(), (data) => {
+          this.setState({ dataSource: data });
+          ctx.setValue(data);
+        })
+        .finally(() => ctx.setBusy(false));
     }
   }
 
@@ -78,6 +83,8 @@ export default class FormDialogViewWidget extends FormViewStructuralWidget<
   public render(): ReactNode {
     const Dialog = getControl('Dialog') as ComponentCtor;
     const Button = getControl('Button') as ComponentCtor;
+    const Wait = getControl('Wait') as ComponentCtor;
+
     const closeDialog = this.closeDialog.bind(this);
 
     return Dialog ? (
@@ -99,7 +106,9 @@ export default class FormDialogViewWidget extends FormViewStructuralWidget<
         disableMask
         onClose={closeDialog}
       >
-        {this.renderForm()}
+        {Wait ? (
+          <Wait busy={this.state.loading}>{this.renderForm()}</Wait>
+        ) : null}
       </Dialog>
     ) : null;
   }
