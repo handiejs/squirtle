@@ -19,6 +19,7 @@ export default class RadioEditBooleanFieldWidget extends BooleanFieldStructuralW
     return RadioGroup ? (
       <RadioGroup
         value={this.props.value}
+        disabled={this.state.disabled}
         onChange={(value) => this.onChange(value)}
       >
         {this.negativeFirst

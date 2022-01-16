@@ -18,6 +18,7 @@ export default class RadioEditEnumFieldWidget extends EnumFieldStructuralWidget<
     return RadioGroup ? (
       <RadioGroup
         value={this.props.value}
+        disabled={this.state.disabled}
         onChange={(value) => this.onChange(value)}
       >
         {this.state.options.map((opt) =>

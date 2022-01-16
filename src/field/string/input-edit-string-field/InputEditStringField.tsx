@@ -9,6 +9,7 @@ export default class InputEditStringFieldWidget extends StringFieldStructuralWid
     const props: Record<string, any> = {
       value: this.props.value,
       placeholder: this.getPlaceholder(),
+      disabled: this.state.disabled,
     };
 
     if (this.showValidationRulesAsNative) {

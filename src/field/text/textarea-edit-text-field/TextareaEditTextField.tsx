@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { StringField } from '@handie/runtime-core/dist/types/input';
 import {
   ComponentCtor,
-  BaseWidgetState,
+  TextFieldWidgetState,
   isNumber,
   getControl,
 } from 'handie-react';
@@ -13,7 +13,7 @@ import { TextareaTextFieldWidgetConfig } from './typing';
 import defaultBehaviors from './behavior';
 
 export default class TextareaEditTextFieldWidget extends TextFieldStructuralWidget<
-  BaseWidgetState,
+  TextFieldWidgetState,
   TextareaTextFieldWidgetConfig
 > {
   public componentWillMount(): void {
@@ -33,6 +33,7 @@ export default class TextareaEditTextFieldWidget extends TextFieldStructuralWidg
       placeholder: this.getPlaceholder(),
       rows: this.config.rows || this.getBehavior('rows'),
       resize: 'none',
+      disabled: this.state.disabled,
     };
 
     if (this.showValidationRulesAsNative) {

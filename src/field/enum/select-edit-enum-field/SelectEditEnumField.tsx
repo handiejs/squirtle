@@ -13,6 +13,7 @@ export default class SelectEditEnumFieldWidget extends EnumFieldStructuralWidget
         value={this.props.value}
         placeholder={this.getPlaceholder()}
         clearable={!this.props.field.required}
+        disabled={this.state.disabled}
         onChange={(value) => this.onChange(value)}
       >
         {this.state.options.map((opt) =>
