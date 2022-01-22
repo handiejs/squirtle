@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
 import { DateValue } from 'handie-react';
-import { DateFieldStructuralWidget } from 'handie-react/dist//widgets/class';
+import { DateFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
-export default class DateRangePickerReadDateFieldWidget extends DateFieldStructuralWidget<
+export default class DateTimeRangeReadDateFieldWidget extends DateFieldStructuralWidget<
   DateValue[]
 > {
   public render(): ReactNode {

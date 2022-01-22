@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 
 import { ComponentCtor, DateValue, getControl, pick } from 'handie-react';
-import { DateFieldStructuralWidget } from 'handie-react/dist//widgets/class';
+import { DateFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
-export default class DatePickerEditDateFieldWidget extends DateFieldStructuralWidget<DateValue> {
+export default class DateEditDateFieldWidget extends DateFieldStructuralWidget<DateValue> {
   public render(): ReactNode {
     const DatePicker = getControl('DatePicker') as ComponentCtor;
 
@@ -13,7 +13,7 @@ export default class DatePickerEditDateFieldWidget extends DateFieldStructuralWi
         placeholder={this.getPlaceholder()}
         disabled={this.state.disabled}
         format={this.config.format}
-        pickerOption={pick(this.config, ['disableDate', 'showToday'])}
+        pickerOption={pick(this.config, ['disableDate', 'showNow'])}
         onChange={(_, date) => this.onDateChange(date)}
       />
     ) : null;
