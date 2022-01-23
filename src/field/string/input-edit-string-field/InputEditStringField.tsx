@@ -1,15 +1,27 @@
 import { ReactNode } from 'react';
 
 import { StringField } from '@handie/runtime-core/dist/types/input';
-import { ComponentCtor, isNumber, getControl } from 'handie-react';
+import {
+  ComponentCtor,
+  StringFieldWidgetState,
+  isNumber,
+  getControl,
+} from 'handie-react';
 import { StringFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
-export default class InputEditStringFieldWidget extends StringFieldStructuralWidget {
+import { InputStringFieldWidgetConfig } from './typing';
+
+export default class InputEditStringFieldWidget extends StringFieldStructuralWidget<
+  StringFieldWidgetState,
+  InputStringFieldWidgetConfig
+> {
   public render(): ReactNode {
     const props: Record<string, any> = {
       value: this.props.value,
       placeholder: this.getPlaceholder(),
       disabled: this.state.disabled,
+      prefix: this.config.prefix,
+      suffix: this.config.suffix,
     };
 
     if (this.showValidationRulesAsNative) {

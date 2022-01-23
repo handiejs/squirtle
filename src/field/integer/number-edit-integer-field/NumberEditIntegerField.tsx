@@ -1,15 +1,28 @@
 import { ReactNode } from 'react';
 
 import { NumberField } from '@handie/runtime-core/dist/types/input';
-import { ComponentCtor, isNumber, isNumeric, getControl } from 'handie-react';
+import {
+  ComponentCtor,
+  IntegerFieldWidgetState,
+  isNumber,
+  isNumeric,
+  getControl,
+} from 'handie-react';
 import { IntegerFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
-export default class NumberEditIntegerFieldWidget extends IntegerFieldStructuralWidget {
+import { NumberIntegerFieldWidgetConfig } from './typing';
+
+export default class NumberEditIntegerFieldWidget extends IntegerFieldStructuralWidget<
+  IntegerFieldWidgetState,
+  NumberIntegerFieldWidgetConfig
+> {
   public render(): ReactNode {
     const props: Record<string, any> = {
       value: this.props.value,
       placeholder: this.getPlaceholder(),
       disabled: this.state.disabled,
+      prefix: this.config.prefix,
+      suffix: this.config.suffix,
     };
 
     if (this.showValidationRulesAsNative) {
