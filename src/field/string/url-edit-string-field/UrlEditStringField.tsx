@@ -9,19 +9,19 @@ import {
 } from 'handie-react';
 import { StringFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
-import { InputStringFieldWidgetConfig } from '../typing';
+import { UrlStringFieldWidgetConfig } from '../typing';
 
-export default class InputEditStringFieldWidget extends StringFieldStructuralWidget<
+export default class UrlEditStringFieldWidget extends StringFieldStructuralWidget<
   StringFieldWidgetState,
-  InputStringFieldWidgetConfig
+  UrlStringFieldWidgetConfig
 > {
   public render(): ReactNode {
     const props: Record<string, any> = {
       value: this.props.value,
       placeholder: this.getPlaceholder(),
       disabled: this.state.disabled,
-      prefix: this.config.prefix,
-      suffix: this.config.suffix,
+      scheme: this.config.scheme || 'http',
+      noAuthority: this.config.noAuthority,
     };
 
     if (this.showValidationRulesAsNative) {
@@ -36,10 +36,10 @@ export default class InputEditStringFieldWidget extends StringFieldStructuralWid
       }
     }
 
-    const TextInput = getControl('TextInput') as ComponentCtor;
+    const UrlInput = getControl('UrlInput') as ComponentCtor;
 
-    return TextInput ? (
-      <TextInput {...props} onInput={(value) => this.onChange(value)} />
+    return UrlInput ? (
+      <UrlInput {...props} onChange={(value) => this.onChange(value)} />
     ) : null;
   }
 }
