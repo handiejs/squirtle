@@ -4,6 +4,14 @@ import { ComponentCtor, getControl } from 'handie-react';
 import { EnumFilterStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class SelectEditEnumFilterWidget extends EnumFilterStructuralWidget {
+  private handleOptionChange(value: number | string): void {
+    this.onChange(value == null ? '' : value);
+
+    if (this.searchImmediately) {
+      this.$$view.reload();
+    }
+  }
+
   public render(): ReactNode {
     const Select = getControl('Select') as ComponentCtor;
     const Option = getControl('Option') as ComponentCtor;
@@ -44,10 +52,7 @@ export default class SelectEditEnumFilterWidget extends EnumFilterStructuralWidg
     }
 
     return Select ? (
-      <Select
-        {...props}
-        onChange={(value) => this.onChange(value == null ? '' : value)}
-      >
+      <Select {...props} onChange={this.handleOptionChange.bind(this)}>
         {children}
       </Select>
     ) : null;

@@ -6,6 +6,14 @@ import { DateFilterStructuralWidget } from 'handie-react/dist/widgets/class';
 export default class DateTimeRangeDateFilterWidget extends DateFilterStructuralWidget<
   DateValue[]
 > {
+  private handleRangeChange(_, dates: (Date | null)[] | null): void {
+    this.onRangeChange(dates);
+
+    if (this.searchImmediately) {
+      this.$$view.reload();
+    }
+  }
+
   public render(): ReactNode {
     const DateTimeRangePicker = getControl(
       'DateTimeRangePicker',
@@ -18,7 +26,7 @@ export default class DateTimeRangeDateFilterWidget extends DateFilterStructuralW
         format={this.config.format}
         separator={this.getSeparator()}
         pickerOption={pick(this.config, ['disableDate', 'showNow'])}
-        onChange={(_, dates) => this.onRangeChange(dates)}
+        onChange={this.handleRangeChange.bind(this)}
       />
     ) : null;
   }

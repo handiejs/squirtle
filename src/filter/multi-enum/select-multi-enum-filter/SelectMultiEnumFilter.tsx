@@ -4,6 +4,14 @@ import { ComponentCtor, getControl } from 'handie-react';
 import { MultiEnumFilterStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class SelectEditMultiEnumFilterWidget extends MultiEnumFilterStructuralWidget {
+  private handleOptionChange(value: number[] | string[]): void {
+    this.onChange(value);
+
+    if (this.searchImmediately) {
+      this.$$view.reload();
+    }
+  }
+
   public render(): ReactNode {
     const props: Record<string, any> = {
       value: this.props.value,
@@ -19,7 +27,7 @@ export default class SelectEditMultiEnumFilterWidget extends MultiEnumFilterStru
     const Option = getControl('Option') as ComponentCtor;
 
     return Select ? (
-      <Select {...props} onChange={this.onChange}>
+      <Select {...props} onChange={this.handleOptionChange.bind(this)}>
         {this.state.options.map((opt) =>
           Option ? <Option label={opt.label} value={opt.value} /> : null,
         )}
