@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { ComponentCtor, getControl } from 'handie-react';
+import { ComponentCtor, isNumber, getControl } from 'handie-react';
 import { MultiEnumFilterStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class SelectEditMultiEnumFilterWidget extends MultiEnumFilterStructuralWidget {
@@ -19,8 +19,14 @@ export default class SelectEditMultiEnumFilterWidget extends MultiEnumFilterStru
       multiple: true,
     };
 
-    if (this.config.className) {
-      props.className = this.config.className;
+    const { className, width } = this.config;
+
+    if (className) {
+      props.className = className;
+    }
+
+    if (width) {
+      props.style = { width: isNumber(width) ? `${width}px` : width };
     }
 
     const Select = getControl('Select') as ComponentCtor;

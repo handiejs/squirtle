@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { ComponentCtor, getControl } from 'handie-react';
+import { ComponentCtor, isNumber, getControl } from 'handie-react';
 import { EnumFilterStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class SelectEditEnumFilterWidget extends EnumFilterStructuralWidget {
@@ -47,8 +47,14 @@ export default class SelectEditEnumFilterWidget extends EnumFilterStructuralWidg
       clearable: !showEmptyValueOption,
     };
 
-    if (this.config.className) {
-      props.className = this.config.className;
+    const { className, width } = this.config;
+
+    if (className) {
+      props.className = className;
+    }
+
+    if (width) {
+      props.style = { width: isNumber(width) ? `${width}px` : width };
     }
 
     return Select ? (
