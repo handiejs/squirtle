@@ -1,6 +1,12 @@
 import { ReactNode } from 'react';
 
-import { ComponentCtor, DateValue, getControl, pick } from 'handie-react';
+import {
+  ComponentCtor,
+  DateValue,
+  isFunction,
+  pick,
+  getControl,
+} from 'handie-react';
 import { DateFilterStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class DateTimeRangeDateFilterWidget extends DateFilterStructuralWidget<
@@ -18,6 +24,16 @@ export default class DateTimeRangeDateFilterWidget extends DateFilterStructuralW
     const DateTimeRangePicker = getControl(
       'DateTimeRangePicker',
     ) as ComponentCtor;
+    const { disableDate, showNow } = pick(this.config, [
+      'disableDate',
+      'showNow',
+    ]) as Record<string, any>;
+    const options: Record<string, any> = { showNow };
+
+    if (isFunction(disableDate)) {
+      options.disableDate = (date: Date) =>
+        disableDate(this.getRangeValue(), date, this.$$view.getValue());
+    }
 
     return DateTimeRangePicker ? (
       <DateTimeRangePicker
@@ -25,7 +41,7 @@ export default class DateTimeRangeDateFilterWidget extends DateFilterStructuralW
         placeholder={this.getRangePlaceholders()}
         format={this.config.format}
         separator={this.getSeparator()}
-        pickerOption={pick(this.config, ['disableDate', 'showNow'])}
+        pickerOption={options}
         onChange={this.handleRangeChange.bind(this)}
       />
     ) : null;
