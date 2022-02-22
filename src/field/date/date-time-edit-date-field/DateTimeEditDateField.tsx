@@ -10,6 +10,11 @@ import {
 import { DateFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class DateTimeEditDateFieldWidget extends DateFieldStructuralWidget<DateValue> {
+  public componentWillMount(): void {
+    super.componentWillMount();
+    this.setDefaultFormat(this.getCommonBehavior('field.dateTimeFormat'));
+  }
+
   public render(): ReactNode {
     const DateTimePicker = getControl('DateTimePicker') as ComponentCtor;
     const { disableDate, showNow } = pick(this.config, [
@@ -28,7 +33,7 @@ export default class DateTimeEditDateFieldWidget extends DateFieldStructuralWidg
         value={this.props.value}
         placeholder={this.getPlaceholder()}
         disabled={this.state.disabled}
-        format={this.config.format}
+        format={this.getDisplayFormat()}
         pickerOption={options}
         onChange={(_, date) => this.onDateChange(date)}
       />

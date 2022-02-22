@@ -20,6 +20,11 @@ export default class DateRangeDateFilterWidget extends DateFilterStructuralWidge
     }
   }
 
+  public componentWillMount(): void {
+    super.componentWillMount();
+    this.setDefaultFormat(this.getCommonBehavior('filter.dateFormat'));
+  }
+
   public render(): ReactNode {
     const DateRangePicker = getControl('DateRangePicker') as ComponentCtor;
     const { disableDate, showNow } = pick(this.config, [
@@ -37,7 +42,7 @@ export default class DateRangeDateFilterWidget extends DateFilterStructuralWidge
       <DateRangePicker
         value={this.getRangeValue()}
         placeholder={this.getRangePlaceholders()}
-        format={this.config.format}
+        format={this.getDisplayFormat()}
         separator={this.getSeparator()}
         pickerOption={options}
         onChange={this.handleRangeChange.bind(this)}

@@ -20,6 +20,11 @@ export default class DateTimeRangeDateFilterWidget extends DateFilterStructuralW
     }
   }
 
+  public componentWillMount(): void {
+    super.componentWillMount();
+    this.setDefaultFormat(this.getCommonBehavior('filter.dateTimeFormat'));
+  }
+
   public render(): ReactNode {
     const DateTimeRangePicker = getControl(
       'DateTimeRangePicker',
@@ -39,7 +44,7 @@ export default class DateTimeRangeDateFilterWidget extends DateFilterStructuralW
       <DateTimeRangePicker
         value={this.getRangeValue()}
         placeholder={this.getRangePlaceholders()}
-        format={this.config.format}
+        format={this.getDisplayFormat()}
         separator={this.getSeparator()}
         pickerOption={options}
         onChange={this.handleRangeChange.bind(this)}

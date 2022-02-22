@@ -12,6 +12,11 @@ import { DateFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 export default class DateRangeEditDateFieldWidget extends DateFieldStructuralWidget<
   DateValue[]
 > {
+  public componentWillMount(): void {
+    super.componentWillMount();
+    this.setDefaultFormat(this.getCommonBehavior('field.dateFormat'));
+  }
+
   public render(): ReactNode {
     const DateRangePicker = getControl('DateRangePicker') as ComponentCtor;
     const { disableDate, showNow } = pick(this.config, [
@@ -30,7 +35,7 @@ export default class DateRangeEditDateFieldWidget extends DateFieldStructuralWid
         value={this.getRangeValue()}
         placeholder={this.getRangePlaceholders()}
         disabled={this.state.disabled}
-        format={this.config.format}
+        format={this.getDisplayFormat()}
         separator={this.getSeparator()}
         pickerOption={options}
         onChange={(_, dates) => this.onRangeChange(dates)}

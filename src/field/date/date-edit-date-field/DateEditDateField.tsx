@@ -10,6 +10,11 @@ import {
 import { DateFieldStructuralWidget } from 'handie-react/dist/widgets/class';
 
 export default class DateEditDateFieldWidget extends DateFieldStructuralWidget<DateValue> {
+  public componentWillMount(): void {
+    super.componentWillMount();
+    this.setDefaultFormat(this.getCommonBehavior('field.dateFormat'));
+  }
+
   public render(): ReactNode {
     const DatePicker = getControl('DatePicker') as ComponentCtor;
     const { disableDate, showNow } = pick(this.config, [
@@ -20,15 +25,15 @@ export default class DateEditDateFieldWidget extends DateFieldStructuralWidget<D
 
     if (isFunction(disableDate)) {
       options.disableDate = (date: Date) =>
-        disableDate(this.props.value, date, this.$$view.getValue());
+        disableDate(this.getDateValue(), date, this.$$view.getValue());
     }
 
     return DatePicker ? (
       <DatePicker
-        value={this.props.value}
+        value={this.getDateValue()}
         placeholder={this.getPlaceholder()}
         disabled={this.state.disabled}
-        format={this.config.format}
+        format={this.getDisplayFormat()}
         pickerOption={options}
         onChange={(_, date) => this.onDateChange(date)}
       />
