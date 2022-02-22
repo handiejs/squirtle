@@ -45,7 +45,7 @@ export default class TextareaEditTextFieldWidget extends TextFieldStructuralWidg
 
       if (isNumber(max)) {
         props.maxLength = max;
-        props.wordage = showWordLimit;
+        props.showWordage = showWordLimit;
       }
     }
 
