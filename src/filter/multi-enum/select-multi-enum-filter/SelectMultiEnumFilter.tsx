@@ -35,7 +35,13 @@ export default class SelectEditMultiEnumFilterWidget extends MultiEnumFilterStru
     return Select ? (
       <Select {...props} onChange={this.handleOptionChange.bind(this)}>
         {this.state.options.map((opt) =>
-          Option ? <Option label={opt.label} value={opt.value} /> : null,
+          Option ? (
+            <Option
+              key={`Option${opt.value}OfSelectEditMultiEnumFilterWidget`}
+              label={opt.label}
+              value={opt.value}
+            />
+          ) : null,
         )}
       </Select>
     ) : null;
