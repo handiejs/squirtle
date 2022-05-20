@@ -2,21 +2,17 @@ import { ReactNode } from 'react';
 
 import {
   ComponentCtor,
-  ViewWidgetConfig,
   ListViewContext,
   ObjectViewContext,
-  ObjectViewWidgetState,
   getControl,
 } from 'handie-react';
 import { FormViewStructuralWidget } from 'handie-react/dist/widgets/class';
 
-interface FormDialogViewWidgetConfig extends ViewWidgetConfig {
-  readonly dialogWidth?: number | string;
-}
-
-interface FormDialogViewWidgetState extends ObjectViewWidgetState {
-  dialogVisible: boolean;
-}
+import {
+  FormDialogViewWidgetConfig,
+  FormDialogViewWidgetState,
+} from './typing';
+import { isOpenerInlineObjectView } from './helper';
 
 export default class FormDialogViewWidget extends FormViewStructuralWidget<
   FormDialogViewWidgetState,
@@ -34,43 +30,67 @@ export default class FormDialogViewWidget extends FormViewStructuralWidget<
     this.setState({ dialogVisible: false }, () => this.$$view.reset());
   }
 
+  private resolveDialogTitle(): string {
+    const { title, moduleLabel } = this.config;
+
+    if (title) {
+      return title;
+    }
+
+    return moduleLabel
+      ? `${
+          isOpenerInlineObjectView(this.$$view.getOpener()!) ? '修改' : '新增'
+        }${moduleLabel}`
+      : '';
+  }
+
   protected fetchData(): void {
     const ctx = this.$$view;
     const opener = ctx.getOpener()!;
 
-    if (opener.getView().category === 'object' && ctx.getOne) {
-      ctx.setBusy(true);
-
-      ctx
-        .getOne((opener as ObjectViewContext).getValue(), (data) => {
-          this.setState({ dataSource: data });
-          ctx.setValue(data);
-        })
-        .finally(() => ctx.setBusy(false));
+    if (!isOpenerInlineObjectView(opener) || !ctx.getOne) {
+      return;
     }
+
+    ctx.setBusy(true);
+
+    ctx
+      .getOne((opener as ObjectViewContext).getValue(), (data) => {
+        this.setState({ dataSource: data });
+        ctx.setValue(data);
+      })
+      .finally(() => ctx.setBusy(false));
   }
 
   public componentDidMount(): void {
     const opener = this.$$view.getOpener()!;
 
-    opener.on(`dialog-view-show.${opener.getId()}`, () => {
-      this.setState({ dialogVisible: true }, () => this.fetchData());
-    });
+    opener.on(`dialog-view-show.${opener.getId()}`, () =>
+      this.setState({ dialogVisible: true }, () => this.fetchData()),
+    );
+
+    const callback = () => {
+      if (opener.getView().category === 'list') {
+        (opener as ListViewContext).reload();
+      } else if ((opener as ObjectViewContext).getParent()) {
+        (opener as ObjectViewContext).getParent()!.reload();
+      } else {
+        opener.emit(`dialog-view-submit.${opener.getId()}`, this.state.value);
+      }
+
+      this.closeDialog();
+    };
 
     this.on('submit', () => {
-      this.$$view.insert(
-        this.state.value,
-        () => {
-          if (opener.getView().category === 'list') {
-            (opener as ListViewContext).reload();
-          } else {
-            (opener as ObjectViewContext).getParent()!.reload();
-          }
-
-          this.closeDialog();
-        },
-        (message) => this.$$app.alert(message),
-      );
+      if (isOpenerInlineObjectView(opener)) {
+        this.$$view.update(this.state.value, callback, (message) =>
+          this.$$app.error(message),
+        );
+      } else {
+        this.$$view.insert(this.state.value, callback, (message) =>
+          this.$$app.error(message),
+        );
+      }
     });
   }
 
@@ -89,7 +109,7 @@ export default class FormDialogViewWidget extends FormViewStructuralWidget<
 
     return Dialog ? (
       <Dialog
-        title={this.config.title}
+        title={this.resolveDialogTitle()}
         width={this.config.dialogWidth || 520}
         footer={
           Button ? (
